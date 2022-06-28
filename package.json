@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint .",
     "lint-staged": "lint-staged",
     "test": "jest"
   },
@@ -32,6 +33,7 @@
     "graphql-relay": "0.10.0"
   },
   "devDependencies": {
+    "@graphql-eslint/eslint-plugin": "3.10.4",
     "@jest/types": "28.1.1",
     "@tsconfig/node16": "1.0.3",
     "@types/jest": "28.1.3",

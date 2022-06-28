@@ -1,14 +1,26 @@
 {
   "root": true,
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.eslint.json"
-  },
-  "plugins": ["@typescript-eslint", "jest"],
-  "extends": [
-    "airbnb-base",
-    "airbnb-typescript/base",
-    "plugin:jest/recommended",
-    "prettier"
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "./tsconfig.eslint.json"
+      },
+      "plugins": ["@typescript-eslint", "jest"],
+      "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "plugin:jest/recommended",
+        "prettier"
+      ]
+    },
+    {
+      "files": ["*.graphql"],
+      "extends": ["plugin:@graphql-eslint/schema-recommended", "prettier"]
+      // "rules": {
+      //   "prettier/prettier": "error"
+      // }
+    }
   ]
 }

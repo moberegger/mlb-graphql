@@ -1,0 +1,13 @@
+"""A baseball Player"""
+type Player {
+  """Player Id"""
+  id: ID!
+  """Player Name"""
+  name: String!
+}
+
+"""Root Query"""
+type Query {
+  """Find a Player by ID"""
+  player(id:            ID!): Player
+}
