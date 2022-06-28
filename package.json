@@ -19,6 +19,10 @@
     "url": "https://github.com/moberegger/mlb-graphql/issues"
   },
   "homepage": "https://github.com/moberegger/mlb-graphql#readme",
+  "engines": {
+    "node": "18.4",
+    "npm": "8.14.0"
+  },
   "pre-commit": [
     "lint-staged"
   ],
