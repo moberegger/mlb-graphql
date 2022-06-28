@@ -1,8 +1,6 @@
 module.exports = {
   Query: {
-    player: () => ({
-      id: 1,
-      name: "Mike",
-    }),
+    player: (_: any, args: any, ctx: any) =>
+      ctx.dataSources.mlbStatsApi.getPlayer(args.id),
   },
 };
