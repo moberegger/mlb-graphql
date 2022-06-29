@@ -1,0 +1,19 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+      # target: base
+    expose:
+      - 4000
+    ports: 
+      - 4000:4000
+    depends_on:
+      - redis
+    links:
+      - redis
+    volumes:
+      - ./src:/usr/app/src
+    # command: npm run start
+  redis:
+    image: redis:alpine
