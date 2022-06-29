@@ -1,12 +1,94 @@
-"""A baseball Player"""
-type Player {
-  """Player Id"""
-  id: ID!
-  """Player Name"""
-  name: String!
+"""
+That current status of the player.
+"""
+enum PlayerStatus {
+  """
+  The player is currently active.
+  """
+  ACTIVE
+  """
+  The player is currently on the 10 day injury list.
+  """
+  IL_10
+  """
+  The player is currently on the 15 day injury list.
+  """
+  IL_15
+  """
+  The player is currently on the 60 day injury list.
+  """
+  IL_60
+  """
+  The player is currently in the minor leagues.
+  """
+  MINOR
+  """
+  The player has retired.
+  """
+  RETIRED
 }
 
+"""
+The player's position.
+"""
+enum Position {
+  """
+  Catcher
+  """
+  CATCHER
+  """
+  Infielder
+  """
+  INFIELDER
+  """
+  Outfielder
+  """
+  OUTFIELDER
+  """
+  Pitcher
+  """
+  PITCHER
+}
+
+"""
+The player's primary position.
+"""
+enum PrimaryPosition {
+  CATCHER
+  CENTER_FIELD
+  FIRST_BASE
+  LEFT_FIELD
+  RIGHT_FIELD
+  RELIEF_PITCHER
+  SECOND_BASE
+  SHORTSTOP
+  STARTING_PITCHER
+  THIRD_BASE
+}
+
+"""
+A baseball Player
+"""
+type Player {
+  """
+  Player Id
+  """
+  id: ID!
+  """
+  Player Name
+  """
+  name: String!
+  status: PlayerStatus!
+  position: Position!
+  primaryPosition: PrimaryPosition!
+}
+
+"""
+Root Query type
+"""
 type Query {
-  """Find a Player by ID"""
+  """
+  Find a Player by ID
+  """
   player(id: ID!): Player
 }

@@ -1,5 +1,5 @@
 {
   "*.json": ["prettier --write"],
-  "*.schema": ["prettier --write"],
+  "*.graphql": ["prettier --write"],
   "*.ts": ["prettier --write", "eslint --fix"]
 }
