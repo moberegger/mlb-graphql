@@ -26,9 +26,10 @@ WORKDIR /usr/src/app
 
 # Get npm up-to-date to match npm engine in package json
 RUN npm -g install npm
-COPY --from=build /usr/src/app/dist /usr/src/app/package.json /usr/src/app/package-lock.json ./
+COPY --from=build /usr/src/app/dist ./src
+COPY --from=build /usr/src/app/package.json /usr/src/app/package-lock.json ./
 # Do clean production install
 RUN npm ci --quiet --production
 
 # Run the app
-CMD [ "node", "dist/app.js" ]
+CMD [ "node", "src/index.js" ]

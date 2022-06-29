@@ -7,8 +7,8 @@ import SportRadarAPI from "./datasources/SportRadarAPI";
 
 export default async () => {
   const schema = makeExecutableSchema({
-    typeDefs: await loadFiles("src/*.graphql"),
-    resolvers: await loadFiles("src/resolvers.ts"),
+    typeDefs: await loadFiles("src/**/*.graphql"),
+    resolvers: await loadFiles("src/**/resolvers.(t|j)s"),
   });
 
   return new ApolloServer({

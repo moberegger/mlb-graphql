@@ -1,0 +1,14 @@
+FROM node:18.4.0-alpine
+
+ENV NODE_ENV=development
+EXPOSE 4000
+WORKDIR /usr/src/app
+
+# Get npm up-to-date to match npm engine in package json
+RUN npm -g install npm
+COPY . .
+# Do clean install
+RUN npm ci --quiet
+
+# Run the app
+CMD [ "npm", "run", "start" ]
