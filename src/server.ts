@@ -3,6 +3,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { ApolloServer } from "apollo-server";
 
 import MLBStatsAPI from "./datasources/MLBStatsAPI";
+import SportRadarAPI from "./datasources/SportRadarAPI";
 
 export default async () => {
   const schema = makeExecutableSchema({
@@ -14,6 +15,7 @@ export default async () => {
     schema,
     dataSources: () => ({
       mlbStatsApi: new MLBStatsAPI(),
+      sportsRadarApi: new SportRadarAPI(),
     }),
   });
 };
