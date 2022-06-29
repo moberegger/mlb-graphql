@@ -6,8 +6,7 @@ type Player {
   name: String!
 }
 
-"""Root Query"""
 type Query {
   """Find a Player by ID"""
-  player(id:            ID!): Player
+  player(id: ID!): Player
 }

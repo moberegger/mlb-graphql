@@ -1,21 +1,14 @@
-import { loadFiles } from "@graphql-tools/load-files";
-import { makeExecutableSchema } from "@graphql-tools/schema";
 import { ApolloServer } from "apollo-server";
 
 import MLBStatsAPI from "./datasources/MLBStatsAPI";
 import SportRadarAPI from "./datasources/SportRadarAPI";
+import schema from "./schema";
 
-export default async () => {
-  const schema = makeExecutableSchema({
-    typeDefs: await loadFiles("src/**/*.graphql"),
-    resolvers: await loadFiles("src/**/resolvers.(t|j)s"),
-  });
-
-  return new ApolloServer({
-    schema,
+export default async () =>
+  new ApolloServer({
+    schema: await schema(),
     dataSources: () => ({
       mlbStatsApi: new MLBStatsAPI(),
       sportsRadarApi: new SportRadarAPI(),
     }),
   });
-};
