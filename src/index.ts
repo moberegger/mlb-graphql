@@ -1,9 +1,7 @@
-import server from "./server";
+import server from "./server.js";
 
 const { log } = console;
 
-const start = async () => (await server()).listen();
-
-start().then(({ url }) => {
+server.listen().then(({ url }) => {
   log(`🚀  Server ready at ${url}`);
 });
