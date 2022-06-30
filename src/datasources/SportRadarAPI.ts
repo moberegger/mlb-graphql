@@ -1,6 +1,6 @@
 import { RESTDataSource, RequestOptions } from "apollo-datasource-rest";
 
-const API_KEY: string = process.env.SPORT_RADAR_API_KEY || "";
+const API_KEY: string = process.env["SPORT_RADAR_API_KEY"] || "";
 
 export default class SportRadarAPI extends RESTDataSource {
   apiKey: string;
@@ -11,7 +11,7 @@ export default class SportRadarAPI extends RESTDataSource {
     this.apiKey = API_KEY;
   }
 
-  willSendRequest(request: RequestOptions) {
+  override willSendRequest(request: RequestOptions) {
     request.params.append("api_key", this.apiKey);
   }
 
