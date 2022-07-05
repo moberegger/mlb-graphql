@@ -5,6 +5,7 @@ import type { PrimaryPosition } from "./utils/mapPrimaryPosition.js";
 
 import mapPlayer from "./utils/mapPlayer.js";
 import ExtendedRESTDataSource from "./base/ExtendedRESTDataSource.js";
+import url from "./base/url.js";
 
 const API_KEY: string = process.env["SPORT_RADAR_API_KEY"] || "";
 
@@ -37,7 +38,7 @@ export default class SportRadarAPI extends ExtendedRESTDataSource {
   async getPlayer(id: string) {
     const response = await this.nullableGet<{
       player: APIPlayer;
-    }>(`players/${id}/profile.json`);
+    }>(url`players/${id}/profile.json`);
 
     if (!response) return null;
 
