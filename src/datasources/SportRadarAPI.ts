@@ -1,9 +1,27 @@
 import { RESTDataSource, RequestOptions } from "apollo-datasource-rest";
 
+import type { Position } from "./utils/mapPosition.js";
+import type { PrimaryPosition } from "./utils/mapPrimaryPosition.js";
+
+import mapPlayer from "./utils/mapPlayer.js";
+
 const API_KEY: string = process.env["SPORT_RADAR_API_KEY"] || "";
 
+export interface Player {
+  id: string;
+  name: string;
+  position: string;
+  primaryPosition: string;
+}
+export interface APIPlayer {
+  id: string;
+  full_name: string;
+  position: Position;
+  primary_position: PrimaryPosition;
+}
+
 export default class SportRadarAPI extends RESTDataSource {
-  apiKey: string;
+  private apiKey: string;
 
   constructor() {
     super();
@@ -16,13 +34,12 @@ export default class SportRadarAPI extends RESTDataSource {
   }
 
   async getPlayer(id: string) {
-    const { player } = await this.get(`players/${id}/profile.json`);
+    const { player }: { player: APIPlayer } = await this.get(
+      `players/${id}/profile.json`
+    );
 
-    if (!player) return null;
+    // if (!player) return null;
 
-    return {
-      id: player.id,
-      name: player.full_name,
-    };
+    return mapPlayer(player);
   }
 }
