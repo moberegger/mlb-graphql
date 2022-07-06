@@ -1,6 +1,6 @@
 import type { APIPlayer, Player } from "../SportRadarAPI";
 
-import mapPlayer from "./mapPlayer";
+import mapPlayer from "./mapPlayer.js";
 
 describe("mapPlayer()", () => {
   it("maps to a position", () => {
