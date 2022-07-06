@@ -5,13 +5,19 @@ import type { RequestInit, URLSearchParamsInit } from "apollo-server-env";
 export default class ExtendedRESTDataSource<
   TContext = any
 > extends RESTDataSource<TContext> {
-  async nullableGet<TResult>(
+  override async get<TResult = any>(
+    path: string,
+    params?: URLSearchParamsInit,
+    init?: RequestInit
+  ): Promise<TResult>;
+
+  override async get<TResult>(
     path: string,
     params?: URLSearchParamsInit,
     init?: RequestInit
   ): Promise<TResult | null> {
     try {
-      return await super.get(path, params, init);
+      return await super.get<TResult>(path, params, init);
     } catch (error) {
       if (
         error instanceof ApolloError &&

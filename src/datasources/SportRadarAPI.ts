@@ -38,7 +38,7 @@ export default class SportRadarAPI extends ExtendedRESTDataSource {
   }
 
   async getPlayer(id: string) {
-    const response = await this.nullableGet<{
+    const response = await this.get<{
       player: APIPlayer;
     }>(url`players/${id}/profile.json`);
 
