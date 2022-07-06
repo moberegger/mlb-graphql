@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "lint-staged": "lint-staged",
     "start": "nodemon",
-    "test": "jest"
+    "test": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",

@@ -10,7 +10,6 @@ const config: Config.InitialOptions = {
   },
   preset: "ts-jest/presets/default-esm",
   setupFilesAfterEnv: ["jest-extended/all"],
-  testEnvironment: "node",
 };
 
 export default config;
