@@ -9,6 +9,7 @@ describe("mapPlayer()", () => {
       full_name: "Ball Player",
       position: "P",
       primary_position: "SP",
+      pro_debut: "2006-06-10",
     };
 
     const output: Player = {
@@ -16,6 +17,7 @@ describe("mapPlayer()", () => {
       name: "Ball Player",
       position: "PITCHER",
       primaryPosition: "STARTING_PITCHER",
+      proDebut: "2006-06-10",
     };
 
     expect(mapPlayer(input)).toEqual(output);

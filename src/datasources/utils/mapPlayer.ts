@@ -8,9 +8,11 @@ export default ({
   full_name,
   position,
   primary_position,
+  pro_debut,
 }: APIPlayer): Player => ({
   id,
   name: full_name,
   position: mapPosition(position),
   primaryPosition: mapPrimaryPosition(primary_position),
+  proDebut: pro_debut,
 });

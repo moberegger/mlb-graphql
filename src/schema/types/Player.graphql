@@ -81,6 +81,7 @@ type Player {
   status: PlayerStatus!
   position: Position!
   primaryPosition: PrimaryPosition!
+  proDebut: Date!
 }
 
 """

@@ -14,12 +14,14 @@ export interface Player {
   name: string;
   position: string;
   primaryPosition: string;
+  proDebut: string;
 }
 export interface APIPlayer {
   id: string;
   full_name: string;
   position: Position;
   primary_position: PrimaryPosition;
+  pro_debut: string;
 }
 
 export default class SportRadarAPI extends ExtendedRESTDataSource {
