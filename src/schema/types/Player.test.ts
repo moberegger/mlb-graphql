@@ -1,7 +1,7 @@
 import { gql } from "apollo-server";
 import nock from "nock";
 
-import server from "../../../server.js";
+import server from "../../server.js";
 
 nock.disableNetConnect();
 
