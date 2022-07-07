@@ -1,9 +1,10 @@
-import { loadFiles } from "@graphql-tools/load-files";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import {
   typeDefs as scalarTypeDefs,
   resolvers as scalarResolvers,
 } from "graphql-scalars";
+
+import loadFiles from "./utils/loadFiles.js";
 
 const [typeDefs, resolvers] = await Promise.all([
   loadFiles("./**/*.graphql"),

@@ -29,12 +29,12 @@
     "lint-staged"
   ],
   "dependencies": {
-    "@graphql-tools/load-files": "6.6.0",
     "@graphql-tools/schema": "8.5.0",
     "apollo-datasource-rest": "3.6.1",
     "apollo-server": "3.9.0",
     "apollo-server-env": "4.2.1",
     "dotenv": "16.0.1",
+    "globby": "13.1.2",
     "graphql": "16.5.0",
     "graphql-relay": "0.10.0",
     "graphql-scalars": "1.17.0"
