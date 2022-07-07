@@ -1,5 +1,5 @@
 import { InMemoryLRUCache } from "@apollo/utils.keyvaluecache";
-import type { Context } from "apollo-server-core";
+import type { Context as ApolloContext } from "apollo-server-core";
 
 import SportRadarAPI from "./datasources/SportRadarAPI.js";
 import * as services from "./services/index.js";
@@ -14,20 +14,22 @@ export type Services = {
   [Property in keyof typeof services]: ReturnType<typeof services[Property]>;
 };
 
-export interface ServiceContext {
+export type ServiceObject = Services[keyof Services];
+
+export interface AppContext {
   ds: DataSources;
   services: Services;
 }
 
-export interface ServiceFn {
-  (ctx: ServiceContext): object;
+export interface ServiceFn<Service extends Record<string, Function>> {
+  (ctx: AppContext): Service;
 }
 
-export interface ApplicationContext {
+export type Context = ApolloContext<{
   services: Services;
-}
+}>;
 
-export default (): Context<ApplicationContext> => {
+export default (): Context => {
   // TODO: Do this in one step
   const sportsRadarApi = new SportRadarAPI();
   sportsRadarApi.initialize({ context: null, cache });
@@ -35,7 +37,7 @@ export default (): Context<ApplicationContext> => {
   const ds = { sportsRadarApi };
 
   return {
-    services: Object.entries<ServiceFn>(services).reduce(
+    services: Object.entries(services).reduce(
       (allServices, [name, fn]) => ({
         ...allServices,
         [name]: fn({ ds, services: allServices }),

@@ -1,7 +1,9 @@
-import type { ServiceContext } from "../context.js";
+import type { AppContext, ServiceFn } from "../context.js";
 
-export default ({ ds }: ServiceContext) => {
+const service = ({ ds }: AppContext) => {
   const findById = (id: string) => ds.sportsRadarApi.getPlayer(id);
 
   return { findById };
 };
+
+export default service as ServiceFn<ReturnType<typeof service>>;
