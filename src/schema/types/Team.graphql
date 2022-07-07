@@ -1,0 +1,10 @@
+type Team {
+  id: ID!
+  name: String!
+  city: String!
+  abbreviation: String!
+}
+
+extend type Player {
+  currentTeam: Team
+}

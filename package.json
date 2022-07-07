@@ -29,6 +29,7 @@
     "lint-staged"
   ],
   "dependencies": {
+    "@apollo/utils.keyvaluecache": "1.0.1",
     "@graphql-tools/schema": "8.5.0",
     "apollo-datasource-rest": "3.6.1",
     "apollo-server": "3.9.0",
@@ -37,13 +38,15 @@
     "globby": "13.1.2",
     "graphql": "16.5.0",
     "graphql-relay": "0.10.0",
-    "graphql-scalars": "1.17.0"
+    "graphql-scalars": "1.17.0",
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "3.10.4",
     "@jest/types": "28.1.1",
     "@tsconfig/node18-strictest-esm": "1.0.0",
     "@types/jest": "28.1.4",
+    "@types/lodash": "4.14.182",
     "@typescript-eslint/eslint-plugin": "5.30.5",
     "@typescript-eslint/parser": "5.30.5",
     "eslint": "8.19.0",

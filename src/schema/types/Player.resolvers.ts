@@ -1,6 +1,8 @@
+import type { ApplicationContext } from "../../context.js";
+
 export default {
   Query: {
-    player: (_: any, args: any, ctx: any) =>
-      ctx.dataSources.sportsRadarApi.getPlayer(args.id),
+    player: (_: any, { id }: { id: string }, ctx: ApplicationContext) =>
+      ctx.services.player.findById(id),
   },
 };
