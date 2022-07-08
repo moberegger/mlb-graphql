@@ -48,6 +48,9 @@ export default class SportRadarAPI extends ExtendedRESTDataSource {
     this.apiKey = API_KEY;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  override cacheOptionsFor = () => ({ ttl: 60 });
+
   override willSendRequest(request: RequestOptions) {
     request.params.append("api_key", this.apiKey);
   }
