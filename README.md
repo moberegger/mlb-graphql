@@ -10,11 +10,13 @@
 
   - More aggressive cache ttl
   - Retry logic
+  - HTTP keep alive agent?
 
 - Graphql
 
   - Query caching?
   - Connections and connection helper (with pagination)
+  - Graceful shutdown (ex: disconnect keep alive agent)?
 
 - Testing
 
