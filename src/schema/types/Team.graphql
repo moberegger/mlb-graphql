@@ -1,10 +1,14 @@
 type Team {
   id: ID!
   name: String!
-  city: String!
+  market: String!
   abbreviation: String!
 }
 
 extend type Player {
   currentTeam: Team
+}
+
+extend type Query {
+  team(id: ID!): Team
 }

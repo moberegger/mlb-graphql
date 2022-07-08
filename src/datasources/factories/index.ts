@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as player } from "./player.js";
+export { default as team } from "./team.js";

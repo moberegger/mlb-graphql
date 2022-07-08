@@ -3,7 +3,7 @@ import type { APIPlayer, Player } from "../SportRadarAPI";
 import mapPlayer from "./mapPlayer.js";
 
 describe("mapPlayer()", () => {
-  it("maps to a position", () => {
+  it("maps to a player", () => {
     const input: APIPlayer = {
       id: "abc",
       full_name: "Ball Player",

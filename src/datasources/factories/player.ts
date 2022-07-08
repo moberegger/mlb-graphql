@@ -21,7 +21,7 @@ const playerFactory = Sync.makeFactory<APIPlayer>({
   primary_position: Sync.each(
     () => sample(Object.keys(PRIMARY_POSITION_MAP)) as PrimaryPosition
   ),
-  pro_debut: Sync.each(() => format(chance.date(), "yyyy-dd-MM")),
+  pro_debut: Sync.each(() => format(chance.date(), "yyyy-MM-dd")),
 });
 
 export default {
