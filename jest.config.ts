@@ -9,7 +9,7 @@ const config: Config.InitialOptions = {
     "^(\\.{1,2}/.*)\\.js$": "$1",
   },
   preset: "ts-jest/presets/default-esm",
-  setupFilesAfterEnv: ["jest-extended/all"],
+  setupFilesAfterEnv: ["jest-extended/all", "<rootDir>/jest.setup.ts"],
 };
 
 export default config;

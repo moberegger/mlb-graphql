@@ -3,8 +3,6 @@ import nock from "nock";
 
 import server from "../../server.js";
 
-nock.disableNetConnect();
-
 describe("Player type", () => {
   describe("on Query", () => {
     it("returns a player", async () => {
