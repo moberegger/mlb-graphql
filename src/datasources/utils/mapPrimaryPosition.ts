@@ -1,4 +1,4 @@
-const PRIMARY_POSITION_MAP = {
+export const PRIMARY_POSITION_MAP = {
   C: "CATCHER",
   CF: "CENTER_FIELD",
   "1B": "FIRST_BASE",

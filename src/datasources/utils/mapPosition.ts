@@ -1,4 +1,4 @@
-const POSITION_MAP = {
+export const POSITION_MAP = {
   C: "CATCHER",
   IF: "INFIELDER",
   OF: "OUTFIELDER",

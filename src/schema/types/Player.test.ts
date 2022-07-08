@@ -1,23 +1,12 @@
 import { gql } from "apollo-server";
-import nock from "nock";
 
+import * as factories from "../../datasources/factories/index.js";
 import server from "../../server.js";
 
 describe("Player type", () => {
   describe("on Query", () => {
     it("returns a player", async () => {
-      const id = "abc";
-      nock("https://api.sportradar.us")
-        .get(`/mlb/trial/v7/en/players/${id}/profile.json`)
-        .query({ api_key: "" })
-        .reply(200, {
-          player: {
-            id,
-            position: "P",
-            primary_position: "SP",
-            full_name: "Jon Lester",
-          },
-        });
+      const player = factories.player.build();
 
       const { data, errors } = await server.executeOperation({
         query: gql`
@@ -27,27 +16,19 @@ describe("Player type", () => {
               name
               position
               primaryPosition
+              proDebut
             }
           }
         `,
-        variables: { id },
+        variables: { id: player.id },
       });
 
       expect(errors).toBeUndefined();
-      expect(data?.["player"]).toEqual({
-        id,
-        position: "PITCHER",
-        primaryPosition: "STARTING_PITCHER",
-        name: "Jon Lester",
-      });
+      expect(data!["player"]).toEqual(player);
     });
 
     it("returns null", async () => {
-      const id = "abc";
-      nock("https://api.sportradar.us")
-        .get(`/mlb/trial/v7/en/players/${id}/profile.json`)
-        .query({ api_key: "" })
-        .reply(404);
+      const id = factories.player.buildError();
 
       const { data, errors } = await server.executeOperation({
         query: gql`
