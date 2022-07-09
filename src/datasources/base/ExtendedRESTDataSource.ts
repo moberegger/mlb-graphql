@@ -1,24 +1,62 @@
 import { RESTDataSource } from "apollo-datasource-rest";
 import { ApolloError } from "apollo-server";
-import type {
+import {
+  Headers as DSHeaders,
+  Request as DSRequest,
   RequestInfo,
   RequestInit,
+  Response as DSResponse,
   URLSearchParamsInit,
 } from "apollo-server-env";
 import { retry, handleWhenResult, ExponentialBackoff } from "cockatiel";
-import fetch, { Request, Response } from "node-fetch";
+
+const fetchShim = async (req: DSRequest) => {
+  const request = new Request(req.url.toString(), {
+    ...req,
+    headers: Object.keys(req.headers).reduce(
+      (headers, [key, value]) => ({
+        ...headers,
+        [key!]: value,
+      }),
+      {}
+    ),
+  });
+
+  const res = await fetch(request);
+
+  return new DSResponse(await res.text(), {
+    ...res,
+    headers: new DSHeaders(
+      Object.keys(res.headers).reduce(
+        (headers, [key, value]) => ({
+          ...headers,
+          [key!]: value,
+        }),
+        {}
+      )
+    ),
+  });
+};
 
 export default class ExtendedRESTDataSource<
   TContext = any
 > extends RESTDataSource<TContext> {
-  constructor(httpFetch: typeof fetch = fetch) {
+  constructor() {
     const fetchWithRetry = (req: RequestInfo) =>
       retry(
         handleWhenResult((resp) => (resp as Response).status === 403),
-        { maxAttempts: 3, backoff: new ExponentialBackoff() }
-      ).execute(() => httpFetch(req as Request));
+        { maxAttempts: 5, backoff: new ExponentialBackoff() }
+      ).execute(() => {
+        console.info("Attempting fetch of", (req as DSRequest).url.toString());
+        return fetchShim(req as DSRequest);
+      });
 
     super(fetchWithRetry);
+  }
+
+  override didEncounterError(error: Error, request: DSRequest) {
+    console.error(error);
+    super.didEncounterError(error, request);
   }
 
   override async get<TResult = any>(
