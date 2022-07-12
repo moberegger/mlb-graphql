@@ -16,6 +16,7 @@ export interface Player {
   position: string;
   primaryPosition: string;
   proDebut: string;
+  team?: Team;
 }
 export interface APIPlayer {
   id: string;
@@ -23,6 +24,7 @@ export interface APIPlayer {
   position: Position;
   primary_position: PrimaryPosition;
   pro_debut: string;
+  team?: APITeam;
 }
 
 export interface Team {

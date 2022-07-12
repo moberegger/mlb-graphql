@@ -24,7 +24,7 @@ export default {
       .query({ api_key: "" })
       .reply(200, generatedTeam);
 
-    return mapTeam(generatedTeam);
+    return mapTeam(generatedTeam)!;
   },
 
   buildError(code = 404) {

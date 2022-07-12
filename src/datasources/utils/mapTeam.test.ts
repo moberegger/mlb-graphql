@@ -3,7 +3,7 @@ import type { APITeam, Team } from "../SportRadarAPI";
 import mapTeam from "./mapTeam.js";
 
 describe("mapTeam()", () => {
-  it("maps to a position", () => {
+  it("maps to a team", () => {
     const input: APITeam = {
       id: "abc",
       name: "Blue Jays",
@@ -19,5 +19,9 @@ describe("mapTeam()", () => {
     };
 
     expect(mapTeam(input)).toEqual(output);
+  });
+
+  it("returns undefined if no input provided", () => {
+    expect(mapTeam()).toBeUndefined();
   });
 });

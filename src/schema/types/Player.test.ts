@@ -1,4 +1,5 @@
 import { gql } from "apollo-server";
+import omit from "lodash/omit";
 
 import * as factories from "../../datasources/factories/index.js";
 import server from "../../server.js";
@@ -24,7 +25,7 @@ describe("Player type", () => {
       });
 
       expect(errors).toBeUndefined();
-      expect(data!["player"]).toEqual(player);
+      expect(data!["player"]).toEqual(omit(player, ["team"]));
     });
 
     it("returns null", async () => {
