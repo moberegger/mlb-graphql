@@ -3,7 +3,7 @@ import type { Config } from "@jest/types";
 const config: Config.InitialOptions = {
   clearMocks: true,
   globals: {
-    "ts-jest": { useESM: true },
+    "ts-jest": { isolatedModules: true, useESM: true },
   },
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
