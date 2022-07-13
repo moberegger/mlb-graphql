@@ -3,9 +3,9 @@ export const POSITION_MAP = {
   IF: "INFIELDER",
   OF: "OUTFIELDER",
   P: "PITCHER",
-};
+} as const;
 
-export type Position = keyof typeof POSITION_MAP;
+export type APIPosition = keyof typeof POSITION_MAP;
+export type Position = typeof POSITION_MAP[APIPosition];
 
-export default (position: Position): Uppercase<string> =>
-  POSITION_MAP[position];
+export default (position: APIPosition) => POSITION_MAP[position];

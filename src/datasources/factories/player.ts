@@ -5,9 +5,9 @@ import nock from "nock";
 import sample from "lodash/fp/sample";
 
 import type { APIPlayer } from "../SportRadarAPI.js";
-import { Position, POSITION_MAP } from "../utils/mapPosition.js";
+import { APIPosition, POSITION_MAP } from "../utils/mapPosition.js";
 import {
-  PrimaryPosition,
+  APIPrimaryPosition,
   PRIMARY_POSITION_MAP,
 } from "../utils/mapPrimaryPosition.js";
 import mapPlayer from "../utils/mapPlayer.js";
@@ -17,9 +17,9 @@ const chance = new Chance();
 const playerFactory = Sync.makeFactory<APIPlayer>({
   id: Sync.each(() => chance.guid()),
   full_name: Sync.each(() => chance.name()),
-  position: Sync.each(() => sample(Object.keys(POSITION_MAP)) as Position),
+  position: Sync.each(() => sample(Object.keys(POSITION_MAP)) as APIPosition),
   primary_position: Sync.each(
-    () => sample(Object.keys(PRIMARY_POSITION_MAP)) as PrimaryPosition
+    () => sample(Object.keys(PRIMARY_POSITION_MAP)) as APIPrimaryPosition
   ),
   pro_debut: Sync.each(() => format(chance.date(), "yyyy-MM-dd")),
   team: Sync.each(() => ({

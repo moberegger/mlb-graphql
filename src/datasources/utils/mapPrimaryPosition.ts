@@ -9,9 +9,9 @@ export const PRIMARY_POSITION_MAP = {
   SS: "SHORTSTOP",
   SP: "STARTING_PITCHER",
   "3B": "THIRD_BASE",
-};
+} as const;
 
-export type PrimaryPosition = keyof typeof PRIMARY_POSITION_MAP;
+export type APIPrimaryPosition = keyof typeof PRIMARY_POSITION_MAP;
+export type PrimaryPosition = typeof PRIMARY_POSITION_MAP[APIPrimaryPosition];
 
-export default (position: PrimaryPosition): Uppercase<string> =>
-  PRIMARY_POSITION_MAP[position];
+export default (position: APIPrimaryPosition) => PRIMARY_POSITION_MAP[position];
