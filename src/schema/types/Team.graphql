@@ -1,3 +1,7 @@
+type PlayerTeamEdge {
+  node: Team
+}
+
 type Team {
   id: ID!
   name: String!
@@ -6,7 +10,7 @@ type Team {
 }
 
 extend type Player {
-  currentTeam: Team
+  currentTeam: PlayerTeamEdge
 }
 
 extend type Query {

@@ -31,7 +31,7 @@ const playerFactory = Sync.makeFactory<APIPlayer>({
 });
 
 export default {
-  build(player?: APIPlayer) {
+  build(player?: Partial<APIPlayer>) {
     const generatedPlayer = playerFactory.build(player);
     const { id } = generatedPlayer;
 

@@ -25,7 +25,7 @@ describe("Player type", () => {
       });
 
       expect(errors).toBeUndefined();
-      expect(data!["player"]).toEqual(omit(player, ["team"]));
+      expect(data!.player).toEqual(omit(player, ["team"]));
     });
 
     it("returns null", async () => {
@@ -44,7 +44,7 @@ describe("Player type", () => {
       });
 
       expect(errors).toBeUndefined();
-      expect(data?.["player"]).toBeNull();
+      expect(data!.player).toBeNull();
     });
   });
 });

@@ -75,6 +75,6 @@ export default class SportRadarAPI extends ExtendedRESTDataSource {
 
     if (!team) return null;
 
-    return mapTeam(team);
+    return mapTeam(team) || null;
   }
 }

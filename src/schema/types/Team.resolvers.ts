@@ -1,13 +1,16 @@
 import type { Context } from "../../context.js";
+import type { Player } from "../../datasources/SportRadarAPI.js";
+import makeEdge from "../helpers/makeEdge.js";
 
 export default {
   Player: {
-    // currentTeam: (_: any, args: any, ctx: any) =>
-    //   ctx.dataSources.sportsRadarApi.getPlayer(args.id),
+    currentTeam: makeEdge((player: Player, _: object, ctx: Context) =>
+      ctx.services.team.findByPlayerId(player.id)
+    ),
   },
 
   Query: {
-    team: (_: any, { id }: { id: string }, ctx: Context) =>
+    team: (_: undefined, { id }: { id: string }, ctx: Context) =>
       ctx.services.team.findById(id),
   },
 };
