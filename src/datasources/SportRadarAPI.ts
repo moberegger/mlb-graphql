@@ -20,6 +20,7 @@ export interface Player {
   primaryPosition: PrimaryPosition;
   proDebut: string;
   team?: Team;
+  seasons?: Season[];
 }
 export interface APIPlayer {
   id: string;
@@ -28,6 +29,14 @@ export interface APIPlayer {
   primary_position: APIPrimaryPosition;
   pro_debut: string;
   team?: APITeam;
+  seasons?: APISeason[];
+}
+
+export interface Season extends APISeason {}
+
+export interface APISeason {
+  id: string;
+  year: number;
 }
 
 export interface Team {

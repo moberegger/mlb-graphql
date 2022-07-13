@@ -1,0 +1,25 @@
+type Season {
+  id: ID!
+  year: Int!
+}
+
+type PlayerSeasonConnection {
+  edges: [PlayerSeasonEdge]
+  nodes: [Season!]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PlayerSeasonEdge {
+  cursor: String!
+  node: Season
+}
+
+extend type Player {
+  seasons(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PlayerSeasonConnection
+}
