@@ -1,3 +1,4 @@
+import { InMemoryLRUCache } from "@apollo/utils.keyvaluecache";
 import { HttpsAgent } from "agentkeepalive";
 import { RESTDataSource } from "apollo-datasource-rest";
 import { ApolloError } from "apollo-server";
@@ -15,9 +16,7 @@ const keepaliveAgent = new HttpsAgent();
 
 emitter.on("shutdown", () => keepaliveAgent.destroy());
 
-export default class ExtendedRESTDataSource<
-  TContext = any
-> extends RESTDataSource<TContext> {
+export default class ExtendedRESTDataSource extends RESTDataSource<undefined> {
   constructor(httpFetch: typeof fetch = fetch) {
     const fetchWithRetry = (req: RequestInfo) => {
       const request = req as Request;
@@ -30,6 +29,8 @@ export default class ExtendedRESTDataSource<
     };
 
     super(fetchWithRetry);
+
+    this.initialize({ cache: new InMemoryLRUCache(), context: undefined });
   }
 
   override async get<TResult = any>(

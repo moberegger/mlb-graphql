@@ -1,10 +1,6 @@
-import { InMemoryLRUCache } from "@apollo/utils.keyvaluecache";
 import type { Context as ApolloContext } from "apollo-server-core";
-
 import SportRadarAPI from "./datasources/SportRadarAPI.js";
 import * as services from "./services/index.js";
-
-const cache = new InMemoryLRUCache();
 
 export interface DataSources {
   sportsRadarApi: SportRadarAPI;
@@ -30,11 +26,7 @@ export type Context = ApolloContext<{
 }>;
 
 export default (): Context => {
-  // TODO: Do this in one step
-  const sportsRadarApi = new SportRadarAPI();
-  sportsRadarApi.initialize({ context: null, cache });
-
-  const ds = { sportsRadarApi };
+  const ds = { sportsRadarApi: new SportRadarAPI() };
 
   return {
     services: Object.entries(services).reduce(
