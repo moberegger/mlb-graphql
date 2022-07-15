@@ -2,7 +2,7 @@ import Chance from "chance";
 import { Sync } from "factory.ts";
 import format from "date-fns/format";
 import nock from "nock";
-import sample from "lodash/fp/sample";
+import { sample } from "lodash-es";
 
 import type { APIPlayer } from "../SportRadarAPI.js";
 import { APIPosition, POSITION_MAP } from "../utils/mapPosition.js";

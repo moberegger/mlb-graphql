@@ -42,7 +42,6 @@
     "graphql-relay": "0.10.0",
     "graphql-scalars": "1.17.0",
     "i": "0.3.7",
-    "lodash": "4.17.21",
     "lodash-es": "4.17.21",
     "node-fetch": "2.6.7",
     "npm": "8.14.0"
