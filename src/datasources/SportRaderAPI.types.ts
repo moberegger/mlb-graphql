@@ -31,6 +31,8 @@ export type SeasonType = "REG" | "PRE" | "PST";
 export interface OffensiveStats {
   ab: number;
   rbi: number;
+  h: number;
+  avg: string;
   // babip: number;
   // iso: number;
   // obp: number;
@@ -55,6 +57,10 @@ export interface APISeason {
         overall: {
           ab: number;
           rbi: number;
+          avg: string;
+          onbase: {
+            h: number;
+          };
         };
       };
     };
