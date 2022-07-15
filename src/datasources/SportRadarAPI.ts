@@ -1,57 +1,14 @@
 import type { RequestOptions } from "apollo-datasource-rest";
 
-import type { APIPosition, Position } from "./utils/mapPosition.js";
-import type {
-  APIPrimaryPosition,
-  PrimaryPosition,
-} from "./utils/mapPrimaryPosition.js";
-
 import mapPlayer from "./utils/mapPlayer.js";
 import ExtendedRESTDataSource from "./base/ExtendedRESTDataSource.js";
 import url from "./base/url.js";
 import mapTeam from "./utils/mapTeam.js";
+import type { APIPlayer, APITeam } from "./SportRaderAPI.types.js";
 
 const API_KEY: string = process.env["SPORT_RADAR_API_KEY"] || "";
 
-export interface Player {
-  id: string;
-  name: string;
-  position: Position;
-  primaryPosition: PrimaryPosition;
-  proDebut: string;
-  team?: Team;
-  seasons?: Season[];
-}
-export interface APIPlayer {
-  id: string;
-  full_name: string;
-  position: APIPosition;
-  primary_position: APIPrimaryPosition;
-  pro_debut: string;
-  team?: APITeam;
-  seasons?: APISeason[];
-}
-
-export interface Season extends APISeason {}
-
-export interface APISeason {
-  id: string;
-  year: number;
-}
-
-export interface Team {
-  id: string;
-  name: string;
-  market: string;
-  abbreviation: Uppercase<string>;
-}
-
-export interface APITeam {
-  id: string;
-  name: string;
-  market: string;
-  abbr: Uppercase<string>;
-}
+export * from "./SportRaderAPI.types.js";
 
 export default class SportRadarAPI extends ExtendedRESTDataSource {
   private apiKey: string;
