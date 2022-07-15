@@ -1,3 +1,4 @@
+import { HttpsAgent } from "agentkeepalive";
 import { RESTDataSource } from "apollo-datasource-rest";
 import { ApolloError } from "apollo-server";
 import type {
@@ -8,15 +9,25 @@ import type {
 import { retry, handleWhenResult, ExponentialBackoff } from "cockatiel";
 import fetch, { Request, Response } from "node-fetch";
 
+import emitter from "../../core/emitter.js";
+
+const keepaliveAgent = new HttpsAgent();
+
+emitter.on("shutdown", () => keepaliveAgent.destroy());
+
 export default class ExtendedRESTDataSource<
   TContext = any
 > extends RESTDataSource<TContext> {
   constructor(httpFetch: typeof fetch = fetch) {
-    const fetchWithRetry = (req: RequestInfo) =>
-      retry(
+    const fetchWithRetry = (req: RequestInfo) => {
+      const request = req as Request;
+      request.agent = keepaliveAgent;
+
+      return retry(
         handleWhenResult((resp) => (resp as Response).status === 403),
         { maxAttempts: 3, backoff: new ExponentialBackoff() }
-      ).execute(() => httpFetch(req as Request));
+      ).execute(() => httpFetch(request));
+    };
 
     super(fetchWithRetry);
   }
