@@ -1,0 +1,8 @@
+type OffensiveStats {
+  ab: Int!
+  rbi: Int!
+}
+
+extend type Player {
+  careerOffensiveStats: OffensiveStats
+}

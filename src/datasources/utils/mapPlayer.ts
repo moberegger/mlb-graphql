@@ -2,6 +2,7 @@ import type { APIPlayer, Player } from "../SportRadarAPI";
 
 import mapPosition from "./mapPosition.js";
 import mapPrimaryPosition from "./mapPrimaryPosition.js";
+import mapSeason from "./mapSeason.js";
 import mapTeam from "./mapTeam.js";
 
 export default ({
@@ -10,6 +11,7 @@ export default ({
   primary_position,
   pro_debut,
   team,
+  seasons,
   ...player
 }: APIPlayer): Player => ({
   name: full_name,
@@ -17,5 +19,6 @@ export default ({
   primaryPosition: mapPrimaryPosition(primary_position),
   proDebut: pro_debut,
   team: mapTeam(team),
+  seasons: seasons?.map(mapSeason),
   ...player,
 });

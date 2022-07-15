@@ -28,12 +28,37 @@ export interface APIPlayer {
 
 export type SeasonType = "REG" | "PRE" | "PST";
 
-export interface Season extends APISeason {}
+export interface OffensiveStats {
+  ab: number;
+  rbi: number;
+  // babip: number;
+  // iso: number;
+  // obp: number;
+  // ops: number;
+  // slg: number;
+  // xbh: number;
+  // avg: number;
+}
+
+export interface Season extends Omit<APISeason, "totals"> {
+  offensiveStats: OffensiveStats;
+}
 
 export interface APISeason {
   id: string;
   year: number;
   type: SeasonType;
+  // Stats
+  totals: {
+    statistics: {
+      hitting: {
+        overall: {
+          ab: number;
+          rbi: number;
+        };
+      };
+    };
+  };
 }
 
 export interface Team {
