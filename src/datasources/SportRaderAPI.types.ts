@@ -26,11 +26,14 @@ export interface APIPlayer {
   seasons?: APISeason[];
 }
 
+export type SeasonType = "REG" | "PRE" | "PST";
+
 export interface Season extends APISeason {}
 
 export interface APISeason {
   id: string;
   year: number;
+  type: SeasonType;
 }
 
 export interface Team {
