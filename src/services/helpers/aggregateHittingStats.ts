@@ -1,12 +1,8 @@
-import { padEnd, round } from "lodash-es";
-
 import type {
   OffensiveStats,
   Season,
 } from "../../datasources/SportRadarAPI.js";
-
-const battingAvg = (hits: number, ab: number) =>
-  padEnd(round(hits / ab, 3).toString(), 5, "0");
+import battingAvg from "./battingAvg.js";
 
 export default (seasons: Season[]): OffensiveStats => {
   const stats = seasons.reduce<OffensiveStats>(
@@ -21,6 +17,6 @@ export default (seasons: Season[]): OffensiveStats => {
 
   return {
     ...stats,
-    avg: battingAvg(stats.h, stats.ab).toString(),
+    avg: battingAvg(stats.h, stats.ab),
   };
 };

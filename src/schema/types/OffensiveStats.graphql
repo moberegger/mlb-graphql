@@ -2,7 +2,7 @@ type OffensiveStats {
   ab: Int!
   rbi: Int!
   h: Int!
-  avg: String!
+  avg: Float!
 }
 
 extend type Player {
