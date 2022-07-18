@@ -7,6 +7,9 @@ import context from "./context.js";
 export default new ApolloServer({
   schema,
   context,
+  csrfPrevention: true,
+  cache: "bounded",
+  allowBatchedHttpRequests: false,
   plugins: [
     {
       serverWillStart: async () => ({
