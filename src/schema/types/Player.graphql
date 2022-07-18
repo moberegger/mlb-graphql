@@ -66,6 +66,18 @@ enum PrimaryPosition {
   THIRD_BASE
 }
 
+enum Throws {
+  BOTH
+  LEFT
+  RIGHT
+}
+
+enum Bats {
+  LEFT
+  RIGHT
+  SWITCH
+}
+
 """
 A baseball Player
 """
@@ -74,13 +86,21 @@ type Player {
   Player Id
   """
   id: ID!
+  status: PlayerStatus!
+  position: Position!
+  primaryPosition: PrimaryPosition!
   """
   Player Name
   """
   name: String!
-  status: PlayerStatus!
-  position: Position!
-  primaryPosition: PrimaryPosition!
+  jerseyNumber: PositiveInt!
+  height: PositiveInt!
+  weight: PositiveInt!
+  throws: Throws!
+  bats: Bats!
+  highSchool: String!
+  birthDate: Date!
+  homeTown: String!
   proDebut: Date!
 }
 
