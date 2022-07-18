@@ -1,4 +1,5 @@
 import { ApolloServer } from "apollo-server";
+import { ApolloServerPluginCacheControl } from "apollo-server-core";
 
 import emitter from "./core/emitter.js";
 import schema from "./schema.js";
@@ -11,6 +12,7 @@ export default new ApolloServer({
   cache: "bounded",
   allowBatchedHttpRequests: false,
   plugins: [
+    ApolloServerPluginCacheControl({ defaultMaxAge: 300 }),
     {
       serverWillStart: async () => ({
         async serverWillStop() {
