@@ -62,6 +62,7 @@ export interface OffensiveStats {
   sf: number;
   avg: string;
   obp: string;
+  bip: number;
   babip: string;
 
   // iso: number;
@@ -88,6 +89,7 @@ export interface APISeason {
           ab: number;
           rbi: number;
           avg: string;
+          bip: number;
           babip: number;
           obp: number;
           onbase: {

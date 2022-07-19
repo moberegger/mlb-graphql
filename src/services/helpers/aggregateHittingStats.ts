@@ -18,6 +18,7 @@ export default (seasons: Season[]): OffensiveStats => {
       bb: total.bb + offensiveStats.bb,
       hbp: total.hbp + offensiveStats.hbp,
       sf: total.sf + offensiveStats.sf,
+      bip: total.bip + offensiveStats.bip,
     }),
     {
       ab: 0,
@@ -28,6 +29,7 @@ export default (seasons: Season[]): OffensiveStats => {
       bb: 0,
       hbp: 0,
       sf: 0,
+      bip: 0,
       avg: "",
       obp: "",
       babip: "",

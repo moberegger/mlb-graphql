@@ -15,6 +15,8 @@ type OffensiveStats {
   hbp: Int!
   "Sacrifice flies"
   sf: Int!
+  "Balls in play"
+  bip: Int!
   "Batting average of balls in play"
   babip: Float!
   "Batting average"
