@@ -9,6 +9,7 @@
     "lint-staged": "lint-staged",
     "start": "nodemon",
     "test": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "generate": "NODE_OPTIONS='--loader ts-node/esm --experimental-specifier-resolution=node' graphql-codegen",
     "update": "npx npm-check-updates --target minor -u"
   },
   "repository": {
@@ -51,6 +52,9 @@
     "npm": "8.14.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.8.1",
+    "@graphql-codegen/typescript": "2.7.1",
+    "@graphql-codegen/typescript-resolvers": "2.7.1",
     "@graphql-eslint/eslint-plugin": "3.10.6",
     "@jest/types": "28.1.3",
     "@tsconfig/node18-strictest-esm": "1.0.0",
