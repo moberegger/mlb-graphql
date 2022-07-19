@@ -55,8 +55,12 @@ export interface OffensiveStats {
   ab: number;
   rbi: number;
   h: number;
+  hr: number;
+  k: number;
+  sf: number;
   avg: string;
-  // babip: number;
+  babip: string;
+
   // iso: number;
   // obp: number;
   // ops: number;
@@ -81,8 +85,14 @@ export interface APISeason {
           ab: number;
           rbi: number;
           avg: string;
+          babip: number;
           onbase: {
+            hr: number;
             h: number;
+          };
+          outs: {
+            ktotal: number;
+            sacfly: number;
           };
         };
       };

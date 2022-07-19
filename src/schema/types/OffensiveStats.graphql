@@ -1,7 +1,19 @@
 type OffensiveStats {
+  "At Bats"
   ab: Int!
-  rbi: Int!
+  "Hits"
   h: Int!
+  "Runs Batted In"
+  rbi: Int!
+  "Home runs"
+  hr: Int!
+  "Strike outs"
+  k: Int!
+  "Sacrifice Flies"
+  sf: Int!
+  "Batting averge of balls in play"
+  babip: Float!
+  "Batting Average"
   avg: Float!
 }
 
