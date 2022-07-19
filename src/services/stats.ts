@@ -11,7 +11,7 @@ const service = ({ services }: AppContext) => {
         filterBy: { type: "REG" },
       }
     ) => {
-      const seasons = await services.season.findAllPlayerId(id, options);
+      const seasons = await services.season.findAllByPlayerId(id, options);
 
       return aggregateHittingStats(seasons);
     }

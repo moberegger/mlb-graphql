@@ -7,7 +7,7 @@ export default {
   Player: {
     seasons: makeConnection<Player, Context, ConnectionArguments, Season>()(
       (player: Player, _: ConnectionArguments, ctx: Context) =>
-        ctx.services.season.findAllPlayerId(player.id)
+        ctx.services.season.findAllByPlayerId(player.id)
     ),
   },
 };

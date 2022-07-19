@@ -3,7 +3,7 @@ import mapBatHand from "./mapBatHand.js";
 
 import mapPosition from "./mapPosition.js";
 import mapPrimaryPosition from "./mapPrimaryPosition.js";
-import mapSeason from "./mapSeason.js";
+import mapPlayerSeason from "./mapPlayerSeason.js";
 import mapStatus from "./mapStatus.js";
 import mapTeam from "./mapTeam.js";
 import mapThrowHand from "./mapThrowHand.js";
@@ -43,6 +43,6 @@ export default ({
   homeTown: toHomeTown(birthstate, birthcountry, birthcity),
   proDebut: pro_debut,
   team: mapTeam(team),
-  seasons: seasons?.map(mapSeason),
+  seasons: seasons?.map(mapPlayerSeason),
   ...player,
 });

@@ -46,7 +46,7 @@ export interface APIPlayer {
   birthcity: string;
   pro_debut: string;
   team?: APITeam;
-  seasons?: APISeason[];
+  seasons?: APIPlayerSeason[];
 }
 
 export type SeasonType = "REG" | "PRE" | "PST";
@@ -73,39 +73,48 @@ export interface OffensiveStats {
   // avg: number;
 }
 
-export interface Season extends Omit<APISeason, "totals"> {
+export interface Season extends APISeason {
   offensiveStats: OffensiveStats;
 }
 
-export interface APISeason {
+interface APISeason {
   id: string;
   year: number;
   type: SeasonType;
-  // Stats
-  totals: {
-    statistics: {
-      hitting: {
-        overall: {
-          ab: number;
-          rbi: number;
-          avg: string;
-          bip: number;
-          babip: number;
-          obp: number;
-          onbase: {
-            hr: number;
-            bb: number;
-            hbp: number;
-            h: number;
-          };
-          outs: {
-            ktotal: number;
-            sacfly: number;
-          };
-        };
+}
+
+export interface APIStatistics {
+  hitting: {
+    overall: {
+      ab: number;
+      rbi: number;
+      avg: string;
+      bip: number;
+      babip: number;
+      obp: number;
+      onbase: {
+        hr: number;
+        bb: number;
+        hbp: number;
+        h: number;
+      };
+      outs: {
+        ktotal: number;
+        sacfly: number;
       };
     };
   };
+}
+
+export interface APIPlayerSeason extends APISeason {
+  totals: {
+    statistics: APIStatistics;
+  };
+}
+
+export interface APITeamStats {
+  season: APISeason;
+  statistics: APIStatistics;
 }
 
 export interface Team {

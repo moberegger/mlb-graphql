@@ -1,0 +1,11 @@
+type Statistics {
+  hitting: OffensiveStats
+}
+
+extend type PlayerSeasonConnection {
+  statistics: Statistics
+}
+
+extend type PlayerSeasonEdge {
+  statistics: Statistics
+}

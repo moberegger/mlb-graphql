@@ -3,7 +3,7 @@ import memo from "../utils/memo.js";
 import type { AppContext, ServiceFn } from "../context.js";
 
 const service = ({ services }: AppContext) => {
-  const findAllPlayerId = memo(
+  const findAllByPlayerId = memo(
     async (
       id: string,
       options: { filterBy?: { type?: SeasonType | "ALL" } } = {}
@@ -18,7 +18,19 @@ const service = ({ services }: AppContext) => {
     }
   );
 
-  return { findAllPlayerId };
+  const findByIdForPlayer = async ({
+    seasonId,
+    playerId,
+  }: {
+    seasonId: string;
+    playerId: string;
+  }) => {
+    const seasons = await findAllByPlayerId(playerId);
+
+    return seasons?.find((season) => season.id === seasonId);
+  };
+
+  return { findAllByPlayerId, findByIdForPlayer };
 };
 
 export default service as ServiceFn<ReturnType<typeof service>>;
