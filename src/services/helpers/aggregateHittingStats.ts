@@ -2,7 +2,7 @@ import type {
   OffensiveStats,
   Season,
 } from "../../datasources/SportRadarAPI.js";
-import battingAvg from "./battingAvg.js";
+import calculateAvg from "./calculateAvg.js";
 
 export default (seasons: Season[]): OffensiveStats => {
   const stats = seasons.reduce<OffensiveStats>(
@@ -17,6 +17,6 @@ export default (seasons: Season[]): OffensiveStats => {
 
   return {
     ...stats,
-    avg: battingAvg(stats.h, stats.ab),
+    avg: calculateAvg({ h: stats.h, ab: stats.ab }),
   };
 };
