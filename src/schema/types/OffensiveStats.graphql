@@ -9,12 +9,18 @@ type OffensiveStats {
   hr: Int!
   "Strike outs"
   k: Int!
-  "Sacrifice Flies"
+  "Walks"
+  bb: Int!
+  "Hit by pitches"
+  hbp: Int!
+  "Sacrifice flies"
   sf: Int!
-  "Batting averge of balls in play"
+  "Batting average of balls in play"
   babip: Float!
-  "Batting Average"
+  "Batting average"
   avg: Float!
+  "On base percentage"
+  obp: Float!
 }
 
 extend type Player {
