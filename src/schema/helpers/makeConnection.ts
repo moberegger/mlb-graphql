@@ -12,11 +12,12 @@ interface MakeConnectionOptions {
   paginationRequired?: boolean;
 }
 
-interface ExtendedEdge<Root, Node> extends Edge<Node> {
+export interface ExtendedEdge<Root, Node> extends Edge<Node> {
   root: Root;
 }
 
-interface ExtendedConnection<Root, Node> extends Connection<Node> {
+export interface ExtendedConnection<Root, Node> extends Connection<Node> {
+  root: Root;
   edges: Array<ExtendedEdge<Root, Node>>;
   nodes: Array<Node>;
   totalCount: number;
@@ -92,6 +93,7 @@ export default <
 
     return {
       ...connection,
+      root,
       nodes: connection.edges.map((edge) => edge.node),
       edges: connection.edges.map((edge) => ({ root, ...edge })),
       totalCount: response.length,

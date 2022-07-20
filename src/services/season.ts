@@ -30,7 +30,19 @@ const service = ({ services }: AppContext) => {
     return seasons?.find((season) => season.id === seasonId);
   };
 
-  return { findAllByPlayerId, findByIdForPlayer };
+  const findManyByIdsForPlayer = async ({
+    seasonIds,
+    playerId,
+  }: {
+    seasonIds: string[];
+    playerId: string;
+  }) => {
+    const seasons = await findAllByPlayerId(playerId);
+
+    return seasons?.filter((season) => seasonIds.includes(season.id));
+  };
+
+  return { findAllByPlayerId, findByIdForPlayer, findManyByIdsForPlayer };
 };
 
 export default service as ServiceFn<ReturnType<typeof service>>;
