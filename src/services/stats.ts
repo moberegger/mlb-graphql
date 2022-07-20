@@ -2,6 +2,8 @@ import type { AppContext, ServiceFn } from "../context.js";
 import type { SeasonType } from "../datasources/SportRadarAPI.js";
 import memo from "../utils/memo.js";
 import aggregateHittingStats from "./helpers/aggregateHittingStats.js";
+import aggregateStats from "./helpers/aggregateStats.js";
+import type { Statistics } from "./stats.types.js";
 
 const service = ({ services }: AppContext) => {
   const findCareerOffensiveStatsByPlayerId = memo(
@@ -17,7 +19,37 @@ const service = ({ services }: AppContext) => {
     }
   );
 
-  return { findCareerOffensiveStatsByPlayerId };
+  const findBySeasonIdAndPlayerId = async ({
+    seasonId,
+    playerId,
+  }: {
+    seasonId: string;
+    playerId: string;
+  }) => {
+    const season = await services.season.findByIdForPlayer({
+      seasonId,
+      playerId,
+    });
+
+    return { hitting: season?.offensiveStats } as Statistics;
+  };
+
+  const findForSeasonIdsByPlayerId = ({
+    seasonIds,
+    playerId,
+  }: {
+    seasonIds: string[];
+    playerId: string;
+  }) =>
+    services.season
+      .findManyByIdsForPlayer({ seasonIds, playerId })
+      .then(aggregateStats);
+
+  return {
+    findCareerOffensiveStatsByPlayerId,
+    findBySeasonIdAndPlayerId,
+    findForSeasonIdsByPlayerId,
+  };
 };
 
 export default service as ServiceFn<ReturnType<typeof service>>;

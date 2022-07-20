@@ -24,7 +24,7 @@ export default class ExtendedRESTDataSource extends RESTDataSource<undefined> {
 
       return retry(
         handleWhenResult((resp) => (resp as Response).status === 403),
-        { maxAttempts: 3, backoff: new ExponentialBackoff() }
+        { maxAttempts: 5, backoff: new ExponentialBackoff() }
       ).execute(() => httpFetch(request));
     };
 
