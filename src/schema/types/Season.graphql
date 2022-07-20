@@ -1,3 +1,13 @@
+enum SeasonType {
+  ALL
+  "Regular Season"
+  REG
+  "Pre Season"
+  PRE
+  "Post Season"
+  PST
+}
+
 type Season {
   id: ID!
   year: Int!
@@ -21,5 +31,6 @@ extend type Player {
     before: String
     first: Int
     last: Int
+    filterBy: SeasonType
   ): PlayerSeasonConnection
 }
