@@ -1,24 +1,24 @@
 import type {
-  OffensiveStats,
+  HittingStatistics,
   Season,
 } from "../../datasources/SportRadarAPI.js";
 import calculateAvg from "./calculateAvg.js";
 import calculateBABIP from "./calculateBABIP.js";
 import calculateOBP from "./calculateOBP.js";
 
-export default (seasons: Season[]): OffensiveStats => {
-  const stats = seasons.reduce<OffensiveStats>(
-    (total, { offensiveStats }) => ({
+export default (seasons: Season[]): HittingStatistics => {
+  const stats = seasons.reduce<HittingStatistics>(
+    (total, { statistics: { hitting } }) => ({
       ...total,
-      ab: total.ab + offensiveStats.ab,
-      rbi: total.rbi + offensiveStats.rbi,
-      h: total.h + offensiveStats.h,
-      hr: total.hr + offensiveStats.hr,
-      k: total.k + offensiveStats.k,
-      bb: total.bb + offensiveStats.bb,
-      hbp: total.hbp + offensiveStats.hbp,
-      sf: total.sf + offensiveStats.sf,
-      bip: total.bip + offensiveStats.bip,
+      ab: total.ab + hitting.ab,
+      rbi: total.rbi + hitting.rbi,
+      h: total.h + hitting.h,
+      hr: total.hr + hitting.hr,
+      k: total.k + hitting.k,
+      bb: total.bb + hitting.bb,
+      hbp: total.hbp + hitting.hbp,
+      sf: total.sf + hitting.sf,
+      bip: total.bip + hitting.bip,
     }),
     {
       ab: 0,

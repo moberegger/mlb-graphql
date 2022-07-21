@@ -3,7 +3,6 @@ import type { SeasonType } from "../datasources/SportRadarAPI.js";
 import memo from "../utils/memo.js";
 import aggregateHittingStats from "./helpers/aggregateHittingStats.js";
 import aggregateStats from "./helpers/aggregateStats.js";
-import type { Statistics } from "./stats.types.js";
 
 const service = ({ services }: AppContext) => {
   const findCareerOffensiveStatsByPlayerId = memo(
@@ -19,20 +18,16 @@ const service = ({ services }: AppContext) => {
     }
   );
 
-  const findBySeasonIdAndPlayerId = async ({
+  const findBySeasonIdAndPlayerId = ({
     seasonId,
     playerId,
   }: {
     seasonId: string;
     playerId: string;
-  }) => {
-    const season = await services.season.findByIdForPlayer({
-      seasonId,
-      playerId,
-    });
-
-    return { hitting: season?.offensiveStats } as Statistics;
-  };
+  }) =>
+    services.season
+      .findByIdForPlayer({ seasonId, playerId })
+      .then((season) => season?.statistics);
 
   const findForSeasonIdsByPlayerId = ({
     seasonIds,
@@ -45,14 +40,13 @@ const service = ({ services }: AppContext) => {
       .findManyByIdsForPlayer({ seasonIds, playerId })
       .then(aggregateStats);
 
-  const findByTeamId = async (
+  const findByTeamId = (
     teamId: string,
     { type = "REG", year }: { type: SeasonType; year: number }
-  ) => {
-    const season = await services.season.findByTeamId(teamId, { type, year });
-
-    return { hitting: season?.offensiveStats } as Statistics;
-  };
+  ) =>
+    services.season
+      .findByTeamId(teamId, { type, year })
+      .then((season) => season?.statistics);
 
   return {
     findCareerOffensiveStatsByPlayerId,

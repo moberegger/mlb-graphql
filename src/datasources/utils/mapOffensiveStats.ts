@@ -1,6 +1,9 @@
-import type { APIStatistics, OffensiveStats } from "../SportRaderAPI.types.js";
+import type {
+  APIStatistics,
+  HittingStatistics,
+} from "../SportRaderAPI.types.js";
 
-export default (stats: APIStatistics): OffensiveStats => ({
+export default (stats: APIStatistics): HittingStatistics => ({
   ...stats.hitting.overall.onbase,
   ...stats.hitting.overall.outs,
   ...stats.hitting.overall,

@@ -51,7 +51,11 @@ export interface APIPlayer {
 
 export type SeasonType = "REG" | "PRE" | "PST";
 
-export interface OffensiveStats {
+export interface Statistics {
+  hitting: HittingStatistics;
+}
+
+export interface HittingStatistics {
   ab: number;
   rbi: number;
   h: number;
@@ -74,7 +78,7 @@ export interface OffensiveStats {
 }
 
 export interface Season extends APISeason {
-  offensiveStats: OffensiveStats;
+  statistics: Statistics;
 }
 
 interface APISeason {

@@ -1,5 +1,4 @@
-import type { Season } from "../../datasources/SportRadarAPI.js";
-import type { Statistics } from "../stats.types.js";
+import type { Season, Statistics } from "../../datasources/SportRadarAPI.js";
 import aggregateHittingStats from "./aggregateHittingStats.js";
 
 export default (seasons: Season[]): Statistics => {
