@@ -6,16 +6,13 @@ import aggregateStats from "./helpers/aggregateStats.js";
 
 const service = ({ services }: AppContext) => {
   const findCareerOffensiveStatsByPlayerId = memo(
-    async (
+    (
       id: string,
       options: { filterBy?: { type?: SeasonType | "ALL" } } = {
         filterBy: { type: "REG" },
       }
-    ) => {
-      const seasons = await services.season.findAllByPlayerId(id, options);
-
-      return aggregateHittingStats(seasons);
-    }
+    ) =>
+      services.season.findAllByPlayerId(id, options).then(aggregateHittingStats)
   );
 
   const findBySeasonIdAndPlayerId = ({
@@ -42,10 +39,10 @@ const service = ({ services }: AppContext) => {
 
   const findByTeamId = (
     teamId: string,
-    { type = "REG", year }: { type: SeasonType; year: number }
+    { seasonType = "REG", year }: { seasonType: SeasonType; year: number }
   ) =>
     services.season
-      .findByTeamId(teamId, { type, year })
+      .findByTeamId(teamId, { type: seasonType, year })
       .then((season) => season?.statistics);
 
   return {

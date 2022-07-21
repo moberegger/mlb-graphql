@@ -33,7 +33,7 @@ export default {
   TeamSeasonEdge: {
     statistics: (edge: ExtendedEdge<Team, Season>, _: object, ctx: Context) =>
       ctx.services.stats.findByTeamId(edge.root.id, {
-        type: edge.node.type,
+        seasonType: edge.node.type,
         year: edge.node.year,
       }),
   },
