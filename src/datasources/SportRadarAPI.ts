@@ -4,7 +4,13 @@ import mapPlayer from "./utils/mapPlayer.js";
 import ExtendedRESTDataSource from "./base/ExtendedRESTDataSource.js";
 import url from "./base/url.js";
 import mapTeam from "./utils/mapTeam.js";
-import type { APIPlayer, APITeam } from "./SportRaderAPI.types.js";
+import type {
+  APIPlayer,
+  APITeam,
+  APITeamStats,
+  SeasonType,
+} from "./SportRaderAPI.types.js";
+import mapTeamSeason from "./utils/mapTeamSeason.js";
 
 const API_KEY: string = process.env["SPORT_RADAR_API_KEY"] || "";
 
@@ -42,5 +48,18 @@ export default class SportRadarAPI extends ExtendedRESTDataSource {
     if (!team) return null;
 
     return mapTeam(team) || null;
+  }
+
+  async getTeamSeasonalStats(
+    teamId: string,
+    { seasonType = "REG", year }: { seasonType?: SeasonType; year: number }
+  ) {
+    const stats = await this.get<APITeamStats>(
+      url`/seasons/${year.toString()}/${seasonType}/teams/${teamId}/statistics.json`
+    );
+
+    if (!stats) return null;
+
+    return mapTeamSeason(stats);
   }
 }

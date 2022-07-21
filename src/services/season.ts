@@ -2,7 +2,7 @@ import type { SeasonType } from "../datasources/SportRadarAPI.js";
 import memo from "../utils/memo.js";
 import type { AppContext, ServiceFn } from "../context.js";
 
-const service = ({ services }: AppContext) => {
+const service = ({ ds, services }: AppContext) => {
   const findAllByPlayerId = memo(
     async (
       id: string,
@@ -42,7 +42,17 @@ const service = ({ services }: AppContext) => {
     return seasons?.filter((season) => seasonIds.includes(season.id));
   };
 
-  return { findAllByPlayerId, findByIdForPlayer, findManyByIdsForPlayer };
+  const findByTeamId = (
+    id: string,
+    { type = "REG", year }: { type?: SeasonType; year: number }
+  ) => ds.sportsRadarApi.getTeamSeasonalStats(id, { seasonType: type, year });
+
+  return {
+    findAllByPlayerId,
+    findByIdForPlayer,
+    findManyByIdsForPlayer,
+    findByTeamId,
+  };
 };
 
 export default service as ServiceFn<ReturnType<typeof service>>;

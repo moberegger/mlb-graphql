@@ -10,6 +10,7 @@ enum SeasonType {
 
 type Season {
   id: ID!
+  type: SeasonType!
   year: Int!
 }
 
@@ -25,12 +26,20 @@ type PlayerSeasonEdge {
   node: Season
 }
 
+type TeamSeasonEdge {
+  node: Season
+}
+
 extend type Player {
   seasons(
     after: String
     before: String
     first: Int
     last: Int
-    filterBy: SeasonType
+    filterBy: SeasonType = REG
   ): PlayerSeasonConnection
+}
+
+extend type Team {
+  season(year: Int!, type: SeasonType = REG): TeamSeasonEdge
 }

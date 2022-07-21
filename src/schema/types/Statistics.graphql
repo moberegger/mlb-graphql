@@ -9,3 +9,7 @@ extend type PlayerSeasonConnection {
 extend type PlayerSeasonEdge {
   statistics: Statistics
 }
+
+extend type TeamSeasonEdge {
+  statistics: Statistics
+}
