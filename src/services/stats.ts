@@ -45,10 +45,20 @@ const service = ({ services }: AppContext) => {
       .findManyByIdsForPlayer({ seasonIds, playerId })
       .then(aggregateStats);
 
+  const findByTeamId = async (
+    teamId: string,
+    { type = "REG", year }: { type: SeasonType; year: number }
+  ) => {
+    const season = await services.season.findByTeamId(teamId, { type, year });
+
+    return { hitting: season?.offensiveStats } as Statistics;
+  };
+
   return {
     findCareerOffensiveStatsByPlayerId,
     findBySeasonIdAndPlayerId,
     findForSeasonIdsByPlayerId,
+    findByTeamId,
   };
 };
 

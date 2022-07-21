@@ -1,5 +1,9 @@
 import type { Context } from "../../context.js";
-import type { Player, Season } from "../../datasources/SportRaderAPI.types.js";
+import type {
+  Player,
+  Season,
+  Team,
+} from "../../datasources/SportRaderAPI.types.js";
 import type {
   ExtendedConnection,
   ExtendedEdge,
@@ -23,6 +27,14 @@ export default {
       ctx.services.stats.findBySeasonIdAndPlayerId({
         seasonId: edge.node.id,
         playerId: edge.root.id,
+      }),
+  },
+
+  TeamSeasonEdge: {
+    statistics: (edge: ExtendedEdge<Team, Season>, _: object, ctx: Context) =>
+      ctx.services.stats.findByTeamId(edge.root.id, {
+        type: edge.node.type,
+        year: edge.node.year,
       }),
   },
 };
